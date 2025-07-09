@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NewClass
 {
@@ -154,6 +156,47 @@ public class NewClass
         return totalSum - actualSum;
     }
 
+    public class TwoSumOptimal {
+
+        public static int[] twoSum(int[] nums, int target) {
+            if (nums == null || nums.length < 2) {
+                throw new IllegalArgumentException("Array must have at least 2 elements");
+            }
+
+            // Map to store value -> index mapping
+            Map<Integer, Integer> numMap = new HashMap<>();
+
+            for (int i = 0; i < nums.length; i++) {
+                int complement = target - nums[i];
+
+                // Check if complement exists in map
+                if (numMap.containsKey(complement)) {
+                    return new int[]{numMap.get(complement), i};
+                }
+
+                // Store current number and its index
+                numMap.put(nums[i], i);
+            }
+
+            // No solution found
+            throw new IllegalArgumentException("No two sum solution exists");
+        }
+
+        public static void main(String[] args) {
+            int[] nums1 = {2, 7, 11, 15};
+            int target1 = 9;
+
+            int[] result1 = twoSum(nums1, target1);
+            System.out.println("HashMap: [" + result1[0] + ", " + result1[1] + "]");
+
+            // Test with duplicates
+            int[] nums2 = {3, 3};
+            int target2 = 6;
+
+            int[] result2 = twoSum(nums2, target2);
+            System.out.println("Duplicates: [" + result2[0] + ", " + result2[1] + "]");
+        }
+    }
 
 
 }
